@@ -1,4 +1,7 @@
 import { APIRequestContext } from '@playwright/test';
+import * as dotenv from 'dotenv';
+dotenv.config();
+
 
 export class ApiHelper {
   private request: APIRequestContext;
@@ -8,13 +11,17 @@ export class ApiHelper {
     this.request = request;
   }
 
-  async postRequest() {
+  private bUrl: string | undefined = process.env.BASE_URL;
+  private adminPassword: string | undefined = process.env.ADMIN_PASSWORD;
+  private adminEmail: string | undefined = process.env.ADMIN_EMAIL;
+
+  async createAdminToken() {
     const response = await this.request.post(
-      'https://dev.rentzila.com.ua/api/auth/jwt/create/',
+      this.bUrl + '/api/auth/jwt/create/',
       {
         data: {
-          email: 'txt2021@ukr.net',
-          password: 'Qwerty123+',
+          email: this.adminEmail,
+          password: this.adminPassword,
         },
       }
     );
@@ -23,13 +30,13 @@ export class ApiHelper {
     return data;
   }
 
-  async getRequest() {
+  async getFeedbackList() {
     if (!this.token) {
       throw new Error('Token is not available. Please call postRequest first.');
     }
 
     const response = await this.request.get(
-      'https://dev.rentzila.com.ua/api/backcall/',
+      this.bUrl + '/api/backcall/',
       {
         headers: {
           Authorization: `Bearer ${this.token}`,

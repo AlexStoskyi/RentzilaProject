@@ -72,9 +72,9 @@ test('TC_226_Verify ""У Вас залишилися питання?"" form', as
   expect(alertShown).toBe(true);
 
   try {
-    const apiResponse = await apiHelper.postRequest();
+    const apiResponse = await apiHelper.createAdminToken();
 
-    const getResponse = await apiHelper.getRequest();
+    const getResponse = await apiHelper.getFeedbackList();
 
     expect(Array.isArray(getResponse)).toBe(true);
 
