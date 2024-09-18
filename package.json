@@ -1,0 +1,28 @@
+{
+  "name": "rentzila",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "format": "prettier --write .",
+    "script": "npx playwright test",
+    "ui": "npx playwright test --ui"
+  },
+  "keywords": [
+    "automation",
+    "testing",
+    "playwright",
+    "typescript"
+  ],
+  "author": "Oleksandr Stotskyi",
+  "license": "ISC",
+  "description": "Automated testing framework using Playwright and TypeScript.",
+  "devDependencies": {
+    "@faker-js/faker": "^9.0.1",
+    "@playwright/test": "^1.47.0",
+    "@types/node": "^22.5.4",
+    "playwright": "^1.47.0",
+    "prettier": "3.3.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.2"
+  }
+}
