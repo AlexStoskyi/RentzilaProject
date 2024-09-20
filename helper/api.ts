@@ -2,7 +2,6 @@ import { APIRequestContext } from '@playwright/test';
 import * as dotenv from 'dotenv';
 dotenv.config();
 
-
 export class ApiHelper {
   private request: APIRequestContext;
   private token: string | null = null;
@@ -35,14 +34,11 @@ export class ApiHelper {
       throw new Error('Token is not available. Please call postRequest first.');
     }
 
-    const response = await this.request.get(
-      this.bUrl + '/api/backcall/',
-      {
-        headers: {
-          Authorization: `Bearer ${this.token}`,
-        },
-      }
-    );
+    const response = await this.request.get(this.bUrl + '/api/backcall/', {
+      headers: {
+        Authorization: `Bearer ${this.token}`,
+      },
+    });
     return await this.handleResponse(response);
   }
 
