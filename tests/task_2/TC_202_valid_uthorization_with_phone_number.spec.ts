@@ -9,7 +9,7 @@ test.beforeEach(async ({ page }) => {
   await page.goto(url.home_page);
 });
 
-test('Authorization with valid email and password', async ({ page }) => {
+test('Authorization with valid phone number and password', async ({ page }) => {
   const mainPage = new MainPage(page);
   const loginPopUpPage = new LoginPopUpPage(page);
   const phone: string | undefined= process.env.PHONE_NUMBER;

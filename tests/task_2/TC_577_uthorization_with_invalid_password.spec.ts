@@ -10,7 +10,7 @@ test.beforeEach(async ({ page }) => {
   await page.goto(url.home_page);
 });
 
-test('Authorization with valid email and password', async ({ page }) => {
+test('Authorization with invalid password', async ({ page }) => {
   const mainPage = new MainPage(page);
   const loginPopUpPage = new LoginPopUpPage(page);
   const login: string | undefined = process.env.VALID_LOGIN;
