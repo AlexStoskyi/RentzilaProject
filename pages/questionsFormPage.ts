@@ -8,12 +8,15 @@ export class QuestionsPage {
       '//section[starts-with(@class, "Layouts_consultation")]'
     );
   }
+
   get inputName() {
     return this.page.locator('//input[@name]');
   }
+
   get inputNumber() {
     return this.page.locator('//input[@id="mobile"]');
   }
+
   get buttonSubmitForm() {
     return this.page.locator('//button[@type="submit"]');
   }
@@ -23,6 +26,7 @@ export class QuestionsPage {
       '//div[starts-with(@class, "ConsultationForm_name")]/p'
     );
   }
+
   get inputNumberAllure() {
     return this.page.locator(
       '//div[starts-with(@class, "ConsultationForm_phone")]/p'
@@ -44,6 +48,7 @@ export class QuestionsPage {
       return rgbToHex(borderColor) === '#f73859';
     });
   }
+  
   async numberBorderColor(): Promise<boolean> {
     return await this.inputNumber.evaluate(element => {
       const borderColor = window.getComputedStyle(element).borderColor;

@@ -60,9 +60,11 @@ export class SpecialEquipPage {
   async getSpecialEquipTabsCount(): Promise<number> {
     return this.specialEquipTabs.count();
   }
+
   async getTextSpecialEquipmentByIndex(index: number): Promise<string> {
     return this.specialEquipCardName.nth(index).innerText();
   }
+  
   async clickSpecialEquipmentByIndex(index: number): Promise<void> {
     await this.specialEquipCardName.nth(index).click();
   }

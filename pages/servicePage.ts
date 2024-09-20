@@ -52,13 +52,10 @@ export class ServicePage {
     await this.serviceCard.nth(0).click();
   }
 
-  // async getTextFirstService(): Promise<string> {
-  //   return this.serviceCardName.innerText();
-  // }
-
   async clickServiceTabByIndex(index: number): Promise<void> {
     await this.serviceTabs.nth(index).click();
   }
+  
   async clickServiceByIndex(index: number): Promise<void> {
     await this.serviceCardName.nth(index).click();
   }

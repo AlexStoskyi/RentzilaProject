@@ -26,6 +26,7 @@ export class MainPage {
   get profileDropdown(){
     return this.page.locator('//div[starts-with(@class, "ProfileDropdownMenu_container")]');
   }
+  
   get LogoutButton(){
     return this.page.locator('//div[@data-testid="logout"]');
   }
