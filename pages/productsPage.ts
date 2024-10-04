@@ -41,10 +41,6 @@ export class ProductPage {
     );
   }
 
-  get filterBar() {
-    return this.page.locator('data-testid="filterForm"');
-  }
-
   get selectedFiltersField() {
     return this.page.locator(
       '//div[starts-with(@class, "ResetFilters_selectedCategory")]'
@@ -54,6 +50,7 @@ export class ProductPage {
   get buildFilterField() {
     return this.page.locator('//input[@id="serviceCategory-3"]');
   }
+
   get checkBoxName() {
     return this.page.locator(
       '//div[starts-with(@class, "CheckboxService_radio")]/label'
@@ -65,14 +62,17 @@ export class ProductPage {
       '//div[starts-with(@class, "ServiceCategory_category_container")][1]/div[@data-testid="rightArrow"]'
     );
   }
+
   get dropDownAgriculturalContent() {
     return this.page.locator('//div/label[@for="radio-3-0"]');
   }
+
   get dropDownButtonOfBuilding() {
     return this.page.locator(
       '//div[starts-with(@class, "ServiceCategory_category_container")][2]/div[@data-testid="rightArrow"]'
     );
   }
+
   get dropDownBuildingContent() {
     return this.page.locator('//div/label[@for="radio-3-0"]');
   }
@@ -107,6 +107,7 @@ export class ProductPage {
   async getFiltersCount(): Promise<number> {
     return this.selectedFiltersField.count();
   }
+
   async getTextSelectedFilters(): Promise<string> {
     return this.selectedFiltersField.innerText();
   }
@@ -119,17 +120,21 @@ export class ProductPage {
   async mapIsVisible(): Promise<boolean> {
     return this.fieldMap.isVisible();
   }
+
   async searchFieldIsVisible(): Promise<boolean> {
     return this.searchField.isVisible();
   }
+
   async getTextSearchPlaceholder(): Promise<string> {
     const placeholder =
       await this.searchPlaceholder.getAttribute('placeholder');
     return placeholder!;
   }
+
   async searchTenderFieldIsVisible(): Promise<boolean> {
     return this.searchTenderField.isVisible();
   }
+  
   async getTextSearchTenderPlaceholder(): Promise<string> {
     const placeholder =
       await this.searchTenderPlaceholder.getAttribute('placeholder');
