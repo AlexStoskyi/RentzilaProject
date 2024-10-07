@@ -3,7 +3,7 @@ import { ProductPage } from '../../pages/productsPage';
 import { MainPage } from '../../pages/mainPage';
 import { UnitPage } from '../../pages/unitPage';
 import { ServicePage } from '../../pages/servicePage';
-import url from '../../helper/url.json';
+import url from '../../helper/endpoints.json';
 
 test.beforeEach(async ({ page }) => {
   await page.goto(url.home_page);
@@ -25,7 +25,7 @@ test('TC_212_Checking ""Послуги"" section on the main page', async ({
   for (let i = 0; i < countServiceCategories; i++) {
     await servicePage.clickServiceTabByIndex(i);
     const amountOfServices = await servicePage.getServiceCount();
-    expect(amountOfServices).toBeGreaterThan(0);
+    await expect(amountOfServices).toBeGreaterThan(0);
 
     for (let j = 0; j < amountOfServices; j++) {
       const proposesItemName = await servicePage.getTextServiceByIndex(j);
@@ -34,8 +34,8 @@ test('TC_212_Checking ""Послуги"" section on the main page', async ({
       const takenFilterName = await productPage.getTextSelectedFilters();
       await productPage.clickOnDropDownButtonIfClosed();
       await productPage.scrollToCheckBoxName();
-      expect(takenFilterName).toBe(proposesItemName);
-      expect(await productPage.areFilterCheckboxesChecked()).toBe(true);
+      await expect(takenFilterName).toBe(proposesItemName);
+      await expect(await productPage.areFilterCheckboxesChecked()).toBe(true);
 
       const checkboxes = productPage.filterCheckbox;
       const checkBoxName = await productPage.checkBoxName;
@@ -54,8 +54,8 @@ test('TC_212_Checking ""Послуги"" section on the main page', async ({
         }
       }
 
-      expect(activeCheckboxCount).toBe(1);
-      expect(activeCheckboxText).toContain(proposesItemName);
+      await expect(activeCheckboxCount).toBe(1);
+      await expect(activeCheckboxText).toContain(proposesItemName);
 
       await productPage.clickFirstUnit();
       await unitPage.unitShouldBeVisible();
@@ -73,7 +73,7 @@ test('TC_212_Checking ""Послуги"" section on the main page', async ({
           .filter(text => text !== '')
       );
 
-      expect(possibleNames).toContain(proposesItemName);
+      await expect(possibleNames).toContain(proposesItemName);
 
       await mainPage.clickLogo();
       await expect(page).toHaveURL(url.home_page);

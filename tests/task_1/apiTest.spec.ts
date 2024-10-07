@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import url from '../../helper/url.json';
+import url from '../../helper/endpoints.json';
 import { ApiHelper } from '../../helper/api';
 
 test.beforeEach(async ({ page }) => {

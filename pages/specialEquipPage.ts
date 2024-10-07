@@ -4,7 +4,7 @@ export class SpecialEquipPage {
   constructor(private page: Page) {}
 
   get specialEquipSection() {
-    return this.page.locator('//section[@data-testid="specialEquipment"]');
+    return this.page.getByTestId('specialEquipment');
   }
 
   get specialEquipCard() {

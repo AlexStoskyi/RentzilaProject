@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { MainPage } from '../../pages/mainPage';
 import { LoginPopUpPage } from '../../pages/loginPopUpPage';
-import url from '../../helper/url.json';
+import url from '../../helper/endpoints.json';
 
 test.beforeEach(async ({ page }) => {
   await page.goto(url.home_page);

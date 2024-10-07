@@ -3,9 +3,9 @@ import { Page } from '@playwright/test';
 export class MainPage {
   constructor(private page: Page) {}
 
-  get loginButton(){
-    return this.page.locator('//div[starts-with(@class, "NavbarAuthBlock_buttonEnter")]')
-  }
+  // get loginButton(){
+  //   return this.page.locator('//div[starts-with(@class, "NavbarAuthBlock_buttonEnter")]')
+  // }
 
   get logo() {
     return this.page.locator('//a/div[@data-testid="logo"]');
@@ -19,17 +19,17 @@ export class MainPage {
     return this.page.locator('//div[@data-testid="crossButton"]');
   }
 
-  get avatarField(){
-    return this.page.locator('//div[@data-testid="avatarBlock"]')
-  }
+  // get avatarField(){
+  //   return this.page.locator('//div[@data-testid="avatarBlock"]')
+  // }
 
-  get profileDropdown(){
-    return this.page.locator('//div[@class="ProfileDropdownMenu_container__kb2vM"]')
-  }
+  // get profileDropdown(){
+  //   return this.page.locator('//div[@class="ProfileDropdownMenu_container__kb2vM"]')
+  // }
 
-  get LogoutButton(){
-    return this.page.locator('//div[@data-testid="logout"]')
-  }  
+  // get LogoutButton(){
+  //   return this.page.locator('//div[@data-testid="logout"]')
+  // }  
 
   async clickLogo(): Promise<void> {
     await this.logo.click();

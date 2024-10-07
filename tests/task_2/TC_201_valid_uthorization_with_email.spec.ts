@@ -1,9 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { MainPage } from '../../pages/mainPage';
 import { LoginPopUpPage } from '../../pages/loginPopUpPage';
-import url from '../../helper/url.json';
-import * as dotenv from 'dotenv';
-dotenv.config();
+import url from '../../helper/endpoints.json';
 
 test.beforeEach(async ({ page }) => {
   await page.goto(url.home_page);
@@ -12,8 +10,8 @@ test.beforeEach(async ({ page }) => {
 test('Authorization with valid email and password', async ({ page }) => {
   const mainPage = new MainPage(page);
   const loginPopUpPage = new LoginPopUpPage(page);
-  const login: string | undefined= process.env.VALID_LOGIN;
-  const password: string | undefined = process.env.VALID_PASSWORD;
+  const login = process.env.VALID_LOGIN;
+  const password = process.env.VALID_PASSWORD;
 
   await mainPage.loginButton.click();
   expect(loginPopUpPage.popUp).toBeVisible();

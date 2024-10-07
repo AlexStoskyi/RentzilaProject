@@ -4,7 +4,7 @@ export class ServicePage {
   constructor(private page: Page) {}
 
   get servicesSection() {
-    return this.page.locator('//section[@data-testid="services"]');
+    return this.page.getByTestId('services');
   }
 
   get serviceCard() {
@@ -25,7 +25,7 @@ export class ServicePage {
     );
   }
   get serviceMap() {
-    return this.page.locator('//div[@id="map"]');
+    return this.page.locator('#map');
   }
 
   async scrollToServicesSection(): Promise<void> {

@@ -17,7 +17,7 @@ export class LoginPopUpPage {
 
   get submitButton() {
     return this.page.locator(
-      '//div[starts-with(@class, "Authorization_container")]//div[starts-with(@class, "ItemButtons_wrapper")]'
+      '[class*=ItemButtons_wrapper]'
     );
   }
 
@@ -34,15 +34,15 @@ export class LoginPopUpPage {
   }
 
   get hidePasswordButton(){
-    return this.page.locator('//div[@data-testid="reactHookButton"]');
+    return this.page.getByTestId('reactHookButton');
   }
 
   get invalidEmailOrPasswordMessage(){
-    return this.page.locator('//div[@data-testid="errorMessage"]');
+    return this.page.getByTestId('errorMessage');
   }
 
   get closeLoginPopUpButton(){
-    return this.page.locator('//div[@data-testid="authClose"]')
+    return this.page.getByTestId('authClose')
   }
   
   async login(email: string, password: string) {

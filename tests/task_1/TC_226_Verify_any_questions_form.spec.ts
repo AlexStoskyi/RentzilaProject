@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import { MainPage } from '../../pages/mainPage';
 import { FooterPage } from '../../pages/footerPage';
 import { QuestionsPage } from '../../pages/questionsFormPage';
-import url from '../../helper/url.json';
+import url from '../../helper/endpoints.json';
 import invalidNumber from '../../helper/invalidNumber.json';
 import { faker } from '@faker-js/faker';
 import { ApiHelper } from '../../helper/api';

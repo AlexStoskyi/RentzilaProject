@@ -9,7 +9,7 @@ export class UnitPage {
 
   get serviceInUnit() {
     return this.page.locator(
-      '//div[@class="ImageWithDescription_main__faISH"]'
+      '[class*=ImageWithDescription_main]'
     );
   }
 

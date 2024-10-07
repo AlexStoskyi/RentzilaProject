@@ -1,53 +1,54 @@
 import { expect, Page } from '@playwright/test';
 
-export class FooterLinks {
-  constructor(private page: Page) {}
-
-  get privacyPolicyBody() {
-    return this.page.locator(
-      '//div[starts-with(@class, "PrivacyPolicy_container")]'
-    );
-  }
-  get cookiesContainerBody() {
-    return this.page.locator('//div[starts-with(@class, "Cookies_container")]');
-  }
-  get userAgreementBody() {
-    return this.page.locator(
-      '//div[starts-with(@class, "TermsConditions_content")]'
-    );
-  }
-}
 
 export class FooterPage {
   constructor(private page: Page) {}
 
+  get privacyPolicyBody() {
+      return this.page.locator(
+        '[class*=PrivacyPolicy_container]'
+      );
+    }
+
+  get cookiesContainerBody() {
+      return this.page.locator(
+        '[class*=Cookies_container]'
+      );
+    }
+
+  get userAgreementBody() {
+      return this.page.locator(
+        '[class*=TermsConditions_content]'
+      );
+    }
+  
   get footer() {
     return this.page.locator('//div[starts-with(@class, "Footer_footer")]');
   }
 
   get aboutUsField() {
-    return this.page.locator('//div[@data-testid="content"]');
+    return this.page.getByTestId('content');
   }
 
   get privacyPolicyField() {
-    return this.page.locator('//div[@data-testid="politika-konfidenciinosti"]');
+    return this.page.getByTestId('politika-konfidenciinosti');
   }
 
   get cookieRulesField() {
-    return this.page.locator(
-      '//div[@data-testid="pravila-vikoristannya-failiv-cookie"]'
+    return this.page.getByTestId(
+      'pravila-vikoristannya-failiv-cookie'
     );
   }
 
   get termsField() {
-    return this.page.locator(
-      '//div[@data-testid="umovi-dostupu-ta-koristuvannya"]'
+    return this.page.getByTestId(
+      'umovi-dostupu-ta-koristuvannya'
     );
   }
 
   get userField() {
     return this.page.locator(
-      '//div[starts-with(@class, "RentzilaForBuyers_container")]/div[starts-with(@class, "RentzilaForBuyers_title")]'
+      '[class*=RentzilaForBuyers_title]'
     );
   }
 
@@ -71,24 +72,24 @@ export class FooterPage {
 
   get contactsField() {
     return this.page.locator(
-      '//div[starts-with(@class,"RentzilaContacts_title")]'
+      '[class*=RentzilaContacts_title]'
     );
   }
 
   get emailField() {
     return this.page.locator(
-      '//div[starts-with(@class,"RentzilaContacts_container")]'
+      '[class*=RentzilaContacts_container]'
     );
   }
 
   get footerLogo() {
     return this.page.locator(
-      '//div[starts-with(@class, Footer_footer)]/div[@data-testid="logo"]'
+      '[class*=Footer_footer] [data-testid*=logo]'
     );
   }
 
   get rentzilaProtected() {
-    return this.page.locator('//div[@data-testid="copyright"]');
+    return this.page.getByTestId('copyright');
   }
 
   async scrollIntoViewFooter() {
@@ -96,19 +97,21 @@ export class FooterPage {
   }
 
   async checkAllElementsVisible(): Promise<void> {
-    await expect(this.footer).toBeVisible();
-    await expect(this.aboutUsField).toBeVisible();
-    await expect(this.privacyPolicyField).toBeVisible();
-    await expect(this.cookieRulesField).toBeVisible();
-    await expect(this.termsField).toBeVisible();
-    await expect(this.userField).toBeVisible();
-    await expect(this.announcementField).toBeVisible();
-    await expect(this.tendersField).toBeVisible();
-    await expect(this.jobRequestsField).toBeVisible();
-    await expect(this.contactsField).toBeVisible();
-    await expect(this.emailField).toBeVisible();
-    await expect(this.footerLogo).toBeVisible();
-    await expect(this.rentzilaProtected).toBeVisible();
+    await Promise.all([
+      await expect(this.footer).toBeVisible(),
+      await expect(this.aboutUsField).toBeVisible(),
+      await expect(this.privacyPolicyField).toBeVisible(),
+      await expect(this.cookieRulesField).toBeVisible(),
+      await expect(this.termsField).toBeVisible(),
+      await expect(this.userField).toBeVisible(),
+      await expect(this.announcementField).toBeVisible(),
+      await expect(this.tendersField).toBeVisible(),
+      await expect(this.jobRequestsField).toBeVisible(),
+      await expect(this.contactsField).toBeVisible(),
+      await expect(this.emailField).toBeVisible(),
+      await expect(this.footerLogo).toBeVisible(),
+      await expect(this.rentzilaProtected).toBeVisible(),
+    ])
   }
   
   async clickOnPrivacyPolicyField() {

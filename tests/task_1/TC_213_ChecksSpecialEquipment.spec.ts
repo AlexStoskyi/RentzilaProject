@@ -1,10 +1,9 @@
 import { test, expect } from '@playwright/test';
 import { ProductPage } from '../../pages/productsPage';
 import { MainPage } from '../../pages/mainPage';
-import { UnitPage } from '../../pages/unitPage';
 import { SpecialEquipPage } from '../../pages/specialEquipPage';
-import url from '../../helper/url.json';
-import { expectUrl } from '../../helper/checkOutUrl';
+import url from '../../helper/endpoints.json';
+import { expectUrl } from '../../helper/testCreds';
 
 test.beforeEach(async ({ page }) => {
   await page.goto(url.home_page);
