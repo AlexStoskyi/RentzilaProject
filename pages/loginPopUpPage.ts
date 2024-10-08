@@ -16,9 +16,8 @@ export class LoginPopUpPage {
   }
 
   get submitButton() {
-    return this.page.locator(
-      '[class*=ItemButtons_wrapper]'
-    );
+    return this.page.locator('[class*= ItemButtons_darkBlueRoundBtn]'
+    ).first();
   }
 
   get emailErrorMessage() {
@@ -50,17 +49,4 @@ export class LoginPopUpPage {
     await this.passwordField.fill(password);
   }
 
-  async isPasswordVisible(): Promise<boolean> {
-    return this.page.evaluate(() => {
-      const passwordField = document.querySelector('#password') as HTMLInputElement;
-      return passwordField && passwordField.type === 'text';
-    });
-  }
-
-  async isPasswordHidden(): Promise<boolean> {
-    return this.page.evaluate(() => {
-      const passwordField = document.querySelector('#password') as HTMLInputElement;
-      return passwordField && passwordField.type === 'password';
-    });
-  }
 }
