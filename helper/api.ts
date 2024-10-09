@@ -1,6 +1,5 @@
 import { APIRequestContext } from '@playwright/test';
-import * as dotenv from 'dotenv';
-dotenv.config();
+
 
 export class ApiHelper {
   private request: APIRequestContext;
@@ -8,15 +7,24 @@ export class ApiHelper {
 
   constructor(request: APIRequestContext) {
     this.request = request;
+    this.checkEnvVariables();
   }
 
-  private bUrl: string | undefined = process.env.BASE_URL;
-  private adminPassword: string | undefined = process.env.ADMIN_PASSWORD;
-  private adminEmail: string | undefined = process.env.ADMIN_EMAIL;
+  private baseUrl = process.env.BASE_URL;
+  private adminPassword = process.env.ADMIN_PASSWORD;
+  private adminEmail = process.env.ADMIN_EMAIL;
+
+  private checkEnvVariables() {
+    if (!this.baseUrl || !this.adminPassword || !this.adminEmail) {
+      throw new Error(
+        'BASE_URL, ADMIN_PASSWORD, or ADMIN_EMAIL environment variables are not defined.'
+      );
+    }
+  }
 
   async createAdminToken() {
     const response = await this.request.post(
-      this.bUrl + '/api/auth/jwt/create/',
+      this.baseUrl + '/api/auth/jwt/create/',
       {
         data: {
           email: this.adminEmail,
@@ -34,11 +42,12 @@ export class ApiHelper {
       throw new Error('Token is not available. Please call postRequest first.');
     }
 
-    const response = await this.request.get(this.bUrl + '/api/backcall/', {
+    const response = await this.request.get(this.baseUrl + '/api/backcall/', {
       headers: {
         Authorization: `Bearer ${this.token}`,
       },
     });
+    
     return await this.handleResponse(response);
   }
 
@@ -46,9 +55,7 @@ export class ApiHelper {
     if (response.ok()) {
       return await response.json();
     } else {
-      throw new Error(
-        `Request failed with status ${response.status()}: ${response.statusText()}`
-      );
+      this.createAdminToken()
     }
   }
 }

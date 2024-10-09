@@ -4,14 +4,14 @@ export class ProductPage {
   constructor(private page: Page) {}
 
   get searchField() {
-    return this.page.locator('//div[@data-testid="searchForm"]');
+    return this.page.getByTestId('searchForm');
   }
   get searchPlaceholder() {
     return this.page.locator('//div[@data-testid="searchForm"]/input');
   }
   get searchTenderField() {
     return this.page.locator(
-      '//div[starts-with(@class, "Navbar_searchWrapper")]'
+      '[class*=Navbar_searchWrapper]'
     );
   }
   get searchTenderPlaceholder() {
@@ -25,7 +25,7 @@ export class ProductPage {
 
   get unitItem() {
     return this.page.locator(
-      '//div[starts-with(@class, "UnitCard_cardWrapper__JIPt3")][1]'
+      '//div[starts-with(@class, "UnitCard_cardWrapper")][1]'
     );
   }
 
@@ -37,13 +37,13 @@ export class ProductPage {
 
   get serviceInUnit() {
     return this.page.locator(
-      '//div[starts-with(@class, "ImageWithDescription_main")]'
+      '[class*=ImageWithDescription_main]'
     );
   }
 
   get selectedFiltersField() {
     return this.page.locator(
-      '//div[starts-with(@class, "ResetFilters_selectedCategory")]'
+      '[class*=ResetFilters_selectedCategory]'
     );
   }
 
