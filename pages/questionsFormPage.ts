@@ -48,7 +48,7 @@ export class QuestionsPage {
       return rgbToHex(borderColor) === '#f73859';
     });
   }
-  
+
   async numberBorderColor(): Promise<boolean> {
     return await this.inputNumber.evaluate(element => {
       const borderColor = window.getComputedStyle(element).borderColor;

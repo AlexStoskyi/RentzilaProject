@@ -16,8 +16,7 @@ export class LoginPopUpPage {
   }
 
   get submitButton() {
-    return this.page.locator('[class*= ItemButtons_darkBlueRoundBtn]'
-    ).first();
+    return this.page.locator('[class*= ItemButtons_darkBlueRoundBtn]').first();
   }
 
   get emailErrorMessage() {
@@ -32,21 +31,20 @@ export class LoginPopUpPage {
     );
   }
 
-  get hidePasswordButton(){
+  get hidePasswordButton() {
     return this.page.getByTestId('reactHookButton');
   }
 
-  get invalidEmailOrPasswordMessage(){
+  get invalidEmailOrPasswordMessage() {
     return this.page.getByTestId('errorMessage');
   }
 
-  get closeLoginPopUpButton(){
-    return this.page.getByTestId('authClose')
+  get closeLoginPopUpButton() {
+    return this.page.getByTestId('authClose');
   }
-  
+
   async login(email: string, password: string) {
     await this.emailField.fill(email);
     await this.passwordField.fill(password);
   }
-
 }

@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import { MainPage } from '../../pages/mainPage';
 import { LoginPopUpPage } from '../../pages/loginPopUpPage';
 import url from '../../helper/endpoints.json';
-import {checkedPassword} from '../../helper/testCreds';
+import { checkedPassword } from '../../helper/testCreds';
 
 test.beforeEach(async ({ page }) => {
   await page.goto(url.home_page);
@@ -17,13 +17,13 @@ test('Authorization with invalid password', async ({ page }) => {
   expect(loginPopUpPage.popUp).toBeVisible();
   await loginPopUpPage.hidePasswordButton.click();
 
-  for(const password of checkedPassword){
-  await loginPopUpPage.login(login, password);
-  await loginPopUpPage.submitButton.click();
+  for (const password of checkedPassword) {
+    await loginPopUpPage.login(login, password);
+    await loginPopUpPage.submitButton.click();
 
-  await expect(
-    loginPopUpPage.passwordErrorMessage.isVisible() || loginPopUpPage.invalidEmailOrPasswordMessage.isVisible()
-  ).toBeTruthy();
-
-}});
-
+    await expect(
+      loginPopUpPage.passwordErrorMessage.isVisible() ||
+        loginPopUpPage.invalidEmailOrPasswordMessage.isVisible()
+    ).toBeTruthy();
+  }
+});

@@ -10,9 +10,7 @@ export class ProductPage {
     return this.page.locator('//div[@data-testid="searchForm"]/input');
   }
   get searchTenderField() {
-    return this.page.locator(
-      '[class*=Navbar_searchWrapper]'
-    );
+    return this.page.locator('[class*=Navbar_searchWrapper]');
   }
   get searchTenderPlaceholder() {
     return this.page.locator(
@@ -36,15 +34,11 @@ export class ProductPage {
   }
 
   get serviceInUnit() {
-    return this.page.locator(
-      '[class*=ImageWithDescription_main]'
-    );
+    return this.page.locator('[class*=ImageWithDescription_main]');
   }
 
   get selectedFiltersField() {
-    return this.page.locator(
-      '[class*=ResetFilters_selectedCategory]'
-    );
+    return this.page.locator('[class*=ResetFilters_selectedCategory]');
   }
 
   get buildFilterField() {
@@ -134,7 +128,7 @@ export class ProductPage {
   async searchTenderFieldIsVisible(): Promise<boolean> {
     return this.searchTenderField.isVisible();
   }
-  
+
   async getTextSearchTenderPlaceholder(): Promise<string> {
     const placeholder =
       await this.searchTenderPlaceholder.getAttribute('placeholder');
