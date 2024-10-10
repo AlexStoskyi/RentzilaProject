@@ -15,45 +15,30 @@ test('Authorization with empty fields ', async ({ page }) => {
 
   await loginPopUpPage.submitButton.click();
   const errorMessageEmail = await loginPopUpPage.emailErrorMessage;
-  const errorMessagePassword = await loginPopUpPage.passwordErrorMessage
+  const errorMessagePassword = await loginPopUpPage.passwordErrorMessage;
   await expect(errorMessageEmail).toContainText('Поле не може бути порожнім');
   await expect(errorMessageEmail).toBeVisible();
-  await expect(errorMessageEmail).toHaveCSS(
-    'color',
-    'rgb(247, 56, 89)'
-  );
-
+  await expect(errorMessageEmail).toHaveCSS('color', 'rgb(247, 56, 89)');
 
   await expect(errorMessagePassword).toContainText(
     'Поле не може бути порожнім'
   );
   await expect(errorMessagePassword).toBeVisible();
-  await expect(errorMessagePassword).toHaveCSS(
-    'color',
-    'rgb(247, 56, 89)'
-  );
+  await expect(errorMessagePassword).toHaveCSS('color', 'rgb(247, 56, 89)');
 
-
-  await loginPopUpPage.login('alexstoskyi@gmail.com', "");
+  await loginPopUpPage.login('alexstoskyi@gmail.com', '');
   await loginPopUpPage.submitButton.click();
   await expect(errorMessageEmail).not.toBeVisible();
   await expect(errorMessagePassword).toContainText(
     'Поле не може бути порожнім'
   );
   await expect(errorMessagePassword).toBeVisible();
-  await expect(errorMessagePassword).toHaveCSS(
-    'color',
-    'rgb(247, 56, 89)'
-  );
+  await expect(errorMessagePassword).toHaveCSS('color', 'rgb(247, 56, 89)');
 
-
-  await loginPopUpPage.login('','Testuser10');
+  await loginPopUpPage.login('', 'Testuser10');
   await loginPopUpPage.submitButton.click();
   await expect(errorMessageEmail).toContainText('Поле не може бути порожнім');
   await expect(errorMessageEmail).toBeVisible();
-  await expect(errorMessageEmail).toHaveCSS(
-    'color',
-    'rgb(247, 56, 89)'
-  ); 
-  await expect(errorMessagePassword).not.toBeVisible(); 
+  await expect(errorMessageEmail).toHaveCSS('color', 'rgb(247, 56, 89)');
+  await expect(errorMessagePassword).not.toBeVisible();
 });

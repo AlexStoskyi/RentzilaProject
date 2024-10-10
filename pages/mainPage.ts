@@ -19,15 +19,17 @@ export class MainPage {
     await this.logo.click();
   }
 
-  get avatarField(){
+  get avatarField() {
     return this.page.locator('//div[@data-testid="avatarBlock"]');
   }
 
-  get profileDropdown(){
-    return this.page.locator('//div[starts-with(@class, "ProfileDropdownMenu_container")]');
+  get profileDropdown() {
+    return this.page.locator(
+      '//div[starts-with(@class, "ProfileDropdownMenu_container")]'
+    );
   }
-  
-  get LogoutButton(){
+
+  get LogoutButton() {
     return this.page.locator('//div[@data-testid="logout"]');
   }
 }

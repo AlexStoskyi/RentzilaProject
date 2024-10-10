@@ -55,7 +55,7 @@ export class ServicePage {
   async clickServiceTabByIndex(index: number): Promise<void> {
     await this.serviceTabs.nth(index).click();
   }
-  
+
   async clickServiceByIndex(index: number): Promise<void> {
     await this.serviceCardName.nth(index).click();
   }

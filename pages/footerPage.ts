@@ -1,27 +1,20 @@
 import { expect, Page } from '@playwright/test';
 
-
 export class FooterPage {
   constructor(private page: Page) {}
 
   get privacyPolicyBody() {
-      return this.page.locator(
-        '[class*=PrivacyPolicy_container]'
-      );
-    }
+    return this.page.locator('[class*=PrivacyPolicy_container]');
+  }
 
   get cookiesContainerBody() {
-      return this.page.locator(
-        '[class*=Cookies_container]'
-      );
-    }
+    return this.page.locator('[class*=Cookies_container]');
+  }
 
   get userAgreementBody() {
-      return this.page.locator(
-        '[class*=TermsConditions_content]'
-      );
-    }
-  
+    return this.page.locator('[class*=TermsConditions_content]');
+  }
+
   get footer() {
     return this.page.locator('//div[starts-with(@class, "Footer_footer")]');
   }
@@ -35,21 +28,15 @@ export class FooterPage {
   }
 
   get cookieRulesField() {
-    return this.page.getByTestId(
-      'pravila-vikoristannya-failiv-cookie'
-    );
+    return this.page.getByTestId('pravila-vikoristannya-failiv-cookie');
   }
 
   get termsField() {
-    return this.page.getByTestId(
-      'umovi-dostupu-ta-koristuvannya'
-    );
+    return this.page.getByTestId('umovi-dostupu-ta-koristuvannya');
   }
 
   get userField() {
-    return this.page.locator(
-      '[class*=RentzilaForBuyers_title]'
-    );
+    return this.page.locator('[class*=RentzilaForBuyers_title]');
   }
 
   get announcementField() {
@@ -71,21 +58,15 @@ export class FooterPage {
   }
 
   get contactsField() {
-    return this.page.locator(
-      '[class*=RentzilaContacts_title]'
-    );
+    return this.page.locator('[class*=RentzilaContacts_title]');
   }
 
   get emailField() {
-    return this.page.locator(
-      '[class*=RentzilaContacts_container]'
-    );
+    return this.page.locator('[class*=RentzilaContacts_container]');
   }
 
   get footerLogo() {
-    return this.page.locator(
-      '[class*=Footer_footer] [data-testid*=logo]'
-    );
+    return this.page.locator('[class*=Footer_footer] [data-testid*=logo]');
   }
 
   get rentzilaProtected() {
@@ -111,9 +92,9 @@ export class FooterPage {
       await expect(this.emailField).toBeVisible(),
       await expect(this.footerLogo).toBeVisible(),
       await expect(this.rentzilaProtected).toBeVisible(),
-    ])
+    ]);
   }
-  
+
   async clickOnPrivacyPolicyField() {
     await this.privacyPolicyField.click();
   }
