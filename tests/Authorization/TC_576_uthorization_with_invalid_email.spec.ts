@@ -13,12 +13,12 @@ test('Authorization with invalid email', async ({ page }) => {
   const loginPopUpPage = new LoginPopUpPage(page);
   const password = process.env.VALID_PASSWORD;
 
-  await mainPage.loginButton.click();
+  await mainPage.clickLoginButton();
   expect(loginPopUpPage.popUp).toBeVisible();
 
   for (const email of checkedEmail) {
     await loginPopUpPage.login(email, password);
-    await loginPopUpPage.submitButton.click();
+    await loginPopUpPage.clickSubmitButton();
 
     await expect(
       loginPopUpPage.emailErrorMessage.isVisible() ||

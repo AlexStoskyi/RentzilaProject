@@ -1,4 +1,3 @@
-import { th } from '@faker-js/faker/.';
 import { expect, Page } from '@playwright/test';
 
 export class CreateUnitPage {
@@ -15,6 +14,7 @@ export class CreateUnitPage {
       '//div[starts-with(@class, "MuiBox-root css-15zcyu1")]'
     );
   }
+
   get mainBoxInfo() {
     return this.page.locator(
       '(//span[starts-with(@class,"CustomLabel_labelNumber")])[1]'
@@ -261,22 +261,14 @@ export class CreateUnitPage {
   get nextButton() {
     return this.page.locator('//button[@data-testid="nextButton"]');
   }
-
-  async checkMainRootVisible(): Promise<void> {
-    await Promise.all([
-      this.mainBoxInfo.waitFor({ state: 'visible' }),
-      this.mainBoxPhoto.waitFor({ state: 'visible' }),
-      this.mainBoxServices.waitFor({ state: 'visible' }),
-      this.mainBoxCost.waitFor({ state: 'visible' }),
-      this.mainBoxContacts.waitFor({ state: 'visible' }),
-    ]);
-  }
-
+  
   async checkErrorMessages(): Promise<void> {
-    await expect(this.categoryErrorMessage).toBeVisible();
-    await expect(this.announcementTitleError).toBeVisible();
-    await expect(this.manufacturerTransportEquipmentError).toBeVisible();
-    await expect(this.detailedDescriptionError).toBeVisible();
+    await Promise.all([
+      await expect(this.categoryErrorMessage).toBeVisible(),
+      await expect(this.announcementTitleError).toBeVisible(),
+      await expect(this.manufacturerTransportEquipmentError).toBeVisible(),
+      await expect(this.detailedDescriptionError).toBeVisible(),
+    ])
   }
 
   async chooseCategory() {

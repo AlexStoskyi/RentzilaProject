@@ -3,6 +3,7 @@ import { test, expect } from '@playwright/test';
 import { MainPage } from '../../pages/mainPage';
 import { LoginPopUpPage } from '../../pages/loginPopUpPage';
 import url from '../../helper/endpoints.json';
+import expectText from '../../helper/expectText.json'
 import { testSymbols } from '../../helper/testCreds';
 
 test.beforeEach(async ({ page }) => {
@@ -16,22 +17,20 @@ test('Verify model name input field', async ({ page }) => {
   const login: string | undefined = process.env.VALID_LOGIN;
   const password: string | undefined = process.env.VALID_PASSWORD;
 
-  await mainPage.loginButton.click();
+  await mainPage.clickLoginButton();
   await loginPopUpPage.login(login, password);
-  await loginPopUpPage.submitButton.click();
+  await loginPopUpPage.clickSubmitButton();
   await expect(mainPage.avatarField).toBeVisible();
   await page.goto(url.create_unit);
 
-  await expect(createUnitePage.modelNameTitle).toHaveText('Назва моделі');
+  await expect(createUnitePage.modelNameTitle).toHaveText(expectText.modelName);
   const inputBackGroundText =
     await createUnitePage.modelNameInput.getAttribute('placeholder');
-  await expect(inputBackGroundText).toBe('Введіть назву моделі');
+  await expect(inputBackGroundText).toBe(expectText.fillModelName);
 
   for (let i = 0; i < testSymbols.length; i++) {
     await createUnitePage.modelNameInput.fill(testSymbols[i]);
-    await expect(createUnitePage.modelNameError).toHaveText(
-      'У назві моделі може бути не більше 15 символів'
-    );
+    await expect(createUnitePage.modelNameError).toHaveText(expectText.notMoreFifteen);
   }
 
   await createUnitePage.modelNameInput.fill('<>{};^');

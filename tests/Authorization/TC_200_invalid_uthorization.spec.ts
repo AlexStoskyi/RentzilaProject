@@ -10,24 +10,24 @@ test.beforeEach(async ({ page }) => {
 test('Authorization with empty fields ', async ({ page }) => {
   const mainPage = new MainPage(page);
   const loginPopUpPage = new LoginPopUpPage(page);
-  await mainPage.loginButton.click();
+  await mainPage.clickLoginButton();
   expect(loginPopUpPage.popUp).toBeVisible();
 
-  await loginPopUpPage.submitButton.click();
+  await loginPopUpPage.clickSubmitButton();
   const errorMessageEmail = await loginPopUpPage.emailErrorMessage;
   const errorMessagePassword = await loginPopUpPage.passwordErrorMessage;
-  await expect(errorMessageEmail).toContainText('Поле не може бути порожнім');
   await expect(errorMessageEmail).toBeVisible();
+  await expect(errorMessageEmail).toContainText('Поле не може бути порожнім');  
   await expect(errorMessageEmail).toHaveCSS('color', 'rgb(247, 56, 89)');
 
+  await expect(errorMessagePassword).toBeVisible();
   await expect(errorMessagePassword).toContainText(
     'Поле не може бути порожнім'
   );
-  await expect(errorMessagePassword).toBeVisible();
   await expect(errorMessagePassword).toHaveCSS('color', 'rgb(247, 56, 89)');
 
   await loginPopUpPage.login('alexstoskyi@gmail.com', '');
-  await loginPopUpPage.submitButton.click();
+  await loginPopUpPage.clickSubmitButton();
   await expect(errorMessageEmail).not.toBeVisible();
   await expect(errorMessagePassword).toContainText(
     'Поле не може бути порожнім'
@@ -36,9 +36,9 @@ test('Authorization with empty fields ', async ({ page }) => {
   await expect(errorMessagePassword).toHaveCSS('color', 'rgb(247, 56, 89)');
 
   await loginPopUpPage.login('', 'Testuser10');
-  await loginPopUpPage.submitButton.click();
-  await expect(errorMessageEmail).toContainText('Поле не може бути порожнім');
+  await loginPopUpPage.clickSubmitButton();
   await expect(errorMessageEmail).toBeVisible();
+  await expect(errorMessageEmail).toContainText('Поле не може бути порожнім');
   await expect(errorMessageEmail).toHaveCSS('color', 'rgb(247, 56, 89)');
   await expect(errorMessagePassword).not.toBeVisible();
 });

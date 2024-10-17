@@ -13,12 +13,12 @@ test('Authorization with invalid phone number', async ({ page }) => {
   const loginPopUpPage = new LoginPopUpPage(page);
   const password = process.env.VALID_PASSWORD;
 
-  await mainPage.loginButton.click();
+  await mainPage.clickLoginButton();
   expect(loginPopUpPage.popUp).toBeVisible();
 
   for (const phone of checkedNumber) {
     await loginPopUpPage.login(phone, password);
-    await loginPopUpPage.submitButton.click();
+    await loginPopUpPage.clickSubmitButton();
 
     const errorMessageEmail = await loginPopUpPage.emailErrorMessage;
     await expect(errorMessageEmail).toContainText(

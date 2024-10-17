@@ -13,13 +13,13 @@ test('Authorization with invalid password', async ({ page }) => {
   const loginPopUpPage = new LoginPopUpPage(page);
   const login = process.env.VALID_LOGIN;
 
-  await mainPage.loginButton.click();
+  await mainPage.clickLoginButton();
   expect(loginPopUpPage.popUp).toBeVisible();
-  await loginPopUpPage.hidePasswordButton.click();
+  await loginPopUpPage.clickHidePasswordButton();
 
   for (const password of checkedPassword) {
     await loginPopUpPage.login(login, password);
-    await loginPopUpPage.submitButton.click();
+    await loginPopUpPage.clickSubmitButton();
 
     await expect(
       loginPopUpPage.passwordErrorMessage.isVisible() ||

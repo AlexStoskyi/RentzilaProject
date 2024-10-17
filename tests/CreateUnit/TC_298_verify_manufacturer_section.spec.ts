@@ -3,6 +3,7 @@ import { test, expect } from '@playwright/test';
 import { MainPage } from '../../pages/mainPage';
 import { LoginPopUpPage } from '../../pages/loginPopUpPage';
 import url from '../../helper/endpoints.json';
+import expectText from '../../helper/expectText.json';
 import { faker } from '@faker-js/faker';
 
 test.beforeEach(async ({ page }) => {
@@ -16,33 +17,26 @@ test('Verify vehicle manufacturer section', async ({ page }) => {
   const login: string | undefined = process.env.VALID_LOGIN;
   const password: string | undefined = process.env.VALID_PASSWORD;
 
-  await mainPage.loginButton.click();
+  await mainPage.clickLoginButton();
   await loginPopUpPage.login(login, password);
-  await loginPopUpPage.submitButton.click();
+  await loginPopUpPage.clickSubmitButton();
   await expect(mainPage.avatarField).toBeVisible();
   await page.goto(url.create_unit);
 
-  const expectText = 'Виробник транспортного засобу *';
-  await expect(createUnitePage.manufacturerTransportEquipmentTitle).toHaveText(
-    expectText
-  );
+  await expect(createUnitePage.manufacturerTransportEquipmentTitle).toHaveText(expectText.vehicleManufacturer);
 
   const inputBackGroundText =
     await createUnitePage.manufacturerTransportEquipmentInput.getAttribute(
       'placeholder'
     );
-  await expect(inputBackGroundText).toBe(
-    'Введіть виробника транспортного засобу'
-  );
+  await expect(inputBackGroundText).toBe(expectText.fillVehicleManufacturer);
 
   await createUnitePage.nextButton.click();
   await expect(createUnitePage.manufacturerTransportEquipmentField).toHaveCSS(
     'border',
     '1px solid rgb(247, 56, 89)'
   );
-  await expect(createUnitePage.manufacturerTransportEquipmentError).toHaveText(
-    'Це поле обов’язкове'
-  );
+  await expect(createUnitePage.manufacturerTransportEquipmentError).toHaveText(expectText.obligatoryField);
 
   await createUnitePage.manufacturerTransportEquipmentInput.fill('АТЭК');
   await expect(
@@ -65,11 +59,9 @@ test('Verify vehicle manufacturer section', async ({ page }) => {
   );
 
   await createUnitePage.manufacturerTransportEquipmentInput.fill('1234567890');
-  const ochikText =
-    'На жаль, виробника “1234567890“ не знайдено в нашій базі. Щоб додати виробника - зв`яжіться із службою підтримки';
   await expect(
     createUnitePage.manufacturerTransportEquipmentDropDownError
-  ).toHaveText(ochikText);
+  ).toHaveText(expectText.expectTextTransportEquipment);
 
   const randomText = await faker.lorem.words(20).substring(0, 101);
   await createUnitePage.manufacturerTransportEquipmentInput.fill(randomText);
@@ -85,7 +77,5 @@ test('Verify vehicle manufacturer section', async ({ page }) => {
   ).toHaveText('ABC');
 
   await createUnitePage.manufacturerTransportEquipmentFieldCloseButton.click();
-  await expect(createUnitePage.manufacturerTransportEquipmentInput).toHaveText(
-    ''
-  );
+  await expect(createUnitePage.manufacturerTransportEquipmentInput).toHaveText('');
 });
