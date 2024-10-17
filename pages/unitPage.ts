@@ -8,9 +8,7 @@ export class UnitPage {
   }
 
   get serviceInUnit() {
-    return this.page.locator(
-      '[class*=ImageWithDescription_main]'
-    );
+    return this.page.locator('[class*=ImageWithDescription_main]');
   }
 
   async unitShouldBeVisible(): Promise<void> {

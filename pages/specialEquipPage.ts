@@ -64,7 +64,7 @@ export class SpecialEquipPage {
   async getTextSpecialEquipmentByIndex(index: number): Promise<string> {
     return this.specialEquipCardName.nth(index).innerText();
   }
-  
+
   async clickSpecialEquipmentByIndex(index: number): Promise<void> {
     await this.specialEquipCardName.nth(index).click();
   }

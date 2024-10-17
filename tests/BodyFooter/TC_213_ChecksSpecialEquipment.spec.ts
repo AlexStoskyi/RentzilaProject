@@ -22,7 +22,7 @@ test('TC_213_Checking ""Спецтехніка"" section on the main page', asyn
   const countServiceCategories =
     await specialEquipPage.getSpecialEquipTabsCount();
   expect(countServiceCategories).toBeGreaterThan(0);
-  
+
   for (let i = 0; i < countServiceCategories; i++) {
     await specialEquipPage.clickSpecialEquipTabByIndex(i);
     expect(await productPage.mapIsVisible());

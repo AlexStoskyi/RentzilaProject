@@ -1,6 +1,5 @@
 import { APIRequestContext } from '@playwright/test';
 
-
 export class ApiHelper {
   private request: APIRequestContext;
   private token: string | null = null;
@@ -47,7 +46,7 @@ export class ApiHelper {
         Authorization: `Bearer ${this.token}`,
       },
     });
-    
+
     return await this.handleResponse(response);
   }
 
@@ -55,7 +54,7 @@ export class ApiHelper {
     if (response.ok()) {
       return await response.json();
     } else {
-      this.createAdminToken()
+      this.createAdminToken();
     }
   }
 }
