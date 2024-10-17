@@ -2,7 +2,6 @@ import { Page } from '@playwright/test';
 import { BasePage } from './page';
 
 export class MainPage extends BasePage {
-  // constructor(private page: Page) {}
 
   get logo() {
     return this.page.locator('//a/div[@data-testid="logo"]');

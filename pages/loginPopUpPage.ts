@@ -2,7 +2,6 @@ import { Locator, Page } from '@playwright/test';
 import { BasePage } from './page';
 
 export class LoginPopUpPage extends BasePage {
-  // constructor(private page: Page) {}
 
   get popUp() {
     return this.page.locator('div[class*=Authorization_container]');
