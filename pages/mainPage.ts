@@ -1,7 +1,7 @@
 import { Page } from '@playwright/test';
+import { BasePage } from './page';
 
-export class MainPage {
-  constructor(private page: Page) {}
+export class MainPage extends BasePage {
 
   get logo() {
     return this.page.locator('//a/div[@data-testid="logo"]');
@@ -19,15 +19,21 @@ export class MainPage {
     await this.logo.click();
   }
 
-  get avatarField(){
+  get avatarField() {
     return this.page.locator('//div[@data-testid="avatarBlock"]');
   }
 
-  get profileDropdown(){
-    return this.page.locator('//div[starts-with(@class, "ProfileDropdownMenu_container")]');
+  get profileDropdown() {
+    return this.page.locator(
+      '//div[starts-with(@class, "ProfileDropdownMenu_container")]'
+    );
   }
-  
-  get LogoutButton(){
+
+  get LogoutButton() {
     return this.page.locator('//div[@data-testid="logout"]');
+  }
+
+  async clickLoginButton() {
+    await super.clickElement(this.loginButton);
   }
 }

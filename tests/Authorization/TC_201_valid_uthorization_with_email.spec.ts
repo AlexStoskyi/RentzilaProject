@@ -7,22 +7,22 @@ test.beforeEach(async ({ page }) => {
   await page.goto(url.home_page);
 });
 
-test('Authorization with valid phone number and password', async ({ page }) => {
+test('Authorization with valid email and password', async ({ page }) => {
   const mainPage = new MainPage(page);
   const loginPopUpPage = new LoginPopUpPage(page);
-  const phone = process.env.PHONE_NUMBER;
+  const login = process.env.VALID_LOGIN;
   const password = process.env.VALID_PASSWORD;
 
-  await mainPage.loginButton.click();
+  await mainPage.clickLoginButton();
   expect(loginPopUpPage.popUp).toBeVisible();
 
-  await loginPopUpPage.login(phone, password);
-  await loginPopUpPage.hidePasswordButton.click();
-  await expect(loginPopUpPage.passwordField).toHaveAttribute('type', 'text')
-  await loginPopUpPage.hidePasswordButton.click();
-  await expect(loginPopUpPage.passwordField).toHaveAttribute('type', 'password')
+  await loginPopUpPage.login(login, password);
+  await loginPopUpPage.clickHidePasswordButton();
+  await expect(loginPopUpPage.passwordField).toHaveAttribute('type', 'text');
+  await loginPopUpPage.clickHidePasswordButton();
+  await expect(loginPopUpPage.passwordField).toHaveAttribute('type','password');
 
-  await loginPopUpPage.submitButton.click();
+  await loginPopUpPage.clickSubmitButton();
   await expect(mainPage.avatarField).toBeVisible();
   await mainPage.avatarField.click();
   await expect(mainPage.profileDropdown).toBeVisible();
