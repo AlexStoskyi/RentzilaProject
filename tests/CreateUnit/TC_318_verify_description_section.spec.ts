@@ -3,6 +3,7 @@ import { test, expect } from '@playwright/test';
 import { MainPage } from '../../pages/mainPage';
 import { LoginPopUpPage } from '../../pages/loginPopUpPage';
 import url from '../../helper/endpoints.json';
+import expectText from '../../helper/expectText.json';
 import { faker } from '@faker-js/faker';
 
 test.beforeEach(async ({ page }) => {
@@ -16,13 +17,13 @@ test('Verify description section', async ({ page }) => {
   const login: string | undefined = process.env.VALID_LOGIN;
   const password: string | undefined = process.env.VALID_PASSWORD;
 
-  await mainPage.loginButton.click();
+  await mainPage.clickLoginButton();
   await loginPopUpPage.login(login, password);
-  await loginPopUpPage.submitButton.click();
+  await loginPopUpPage.clickSubmitButton();
   await expect(mainPage.avatarField).toBeVisible();
   await page.goto(url.create_unit);
 
-  await expect(createUnitePage.descriptionTitle).toHaveText('Детальний опис');
+  await expect(createUnitePage.descriptionTitle).toHaveText(expectText.detailedDescription);
   await createUnitePage.descriptionInput.click();
   await expect(createUnitePage.specificationsInput).toHaveText('');
 

@@ -2,6 +2,7 @@ import { CreateUnitPage } from '../../pages/createUnitePage';
 import { test, expect } from '@playwright/test';
 import { LoginPopUpPage } from '../../pages/loginPopUpPage';
 import url from '../../helper/endpoints.json';
+import expectText from '../../helper/expectText.json';
 
 test.beforeEach(async ({ page }) => {
   await page.goto(url.create_unit);
@@ -15,26 +16,24 @@ test('Verify category (Категорія) section ', async ({ page }) => {
   const password: string | undefined = process.env.VALID_PASSWORD;
 
   await loginPopUpPage.login(login, password);
-  await loginPopUpPage.submitButton.click();
+  await loginPopUpPage.clickSubmitButton();
 
   await expect(createUnitePage.mainInfoWrapper).toBeVisible();
 
   const categoryText = await createUnitePage.categoryTittle.innerText();
   await expect(categoryText).toContain('*');
   const categoryButtonText = await createUnitePage.categoryButton.innerText();
-  await expect(categoryButtonText).toContain('Виберіть категорію');
+  await expect(categoryButtonText).toContain(expectText.chooseCategory);
   expect(createUnitePage.categoryArrow).toBeVisible();
 
   await createUnitePage.nextButton.click();
-  await expect(createUnitePage.categoryErrorMessage).toContainText(
-    'Це поле обов’язкове'
-  );
+  await expect(createUnitePage.categoryErrorMessage).toContainText(expectText.obligatoryField);
 
   await createUnitePage.categoryButton.click();
   await expect(createUnitePage.categoryPopupWrapper).toBeVisible();
   const popUpTopText =
     await createUnitePage.categoryPopupWrapperTop.innerText();
-  await expect(popUpTopText).toContain('Вибір категорії технічного засобу');
+  await expect(popUpTopText).toContain(expectText.technicalCategories);
   await createUnitePage.closePopUpButton.click();
   await expect(createUnitePage.categoryPopupWrapper).not.toBeVisible();
 

@@ -3,6 +3,7 @@ import { test, expect } from '@playwright/test';
 import { MainPage } from '../../pages/mainPage';
 import { LoginPopUpPage } from '../../pages/loginPopUpPage';
 import url from '../../helper/endpoints.json';
+import expectText from '../../helper/expectText.json';
 
 test.beforeEach(async ({ page }) => {
   await page.goto(url.home_page);
@@ -15,29 +16,24 @@ test('Verify vehicle location division', async ({ page }) => {
   const login: string | undefined = process.env.VALID_LOGIN;
   const password: string | undefined = process.env.VALID_PASSWORD;
 
-  await mainPage.loginButton.click();
+  await mainPage.clickLoginButton();
   await loginPopUpPage.login(login, password);
-  await loginPopUpPage.submitButton.click();
+  await loginPopUpPage.clickSubmitButton();
   await expect(mainPage.avatarField).toBeVisible();
   await page.goto(url.create_unit);
 
-  await expect(createUnitePage.detailedDescriptionTitle).toHaveText(
-    'Місце розташування технічного засобу *'
-  );
-  await expect(createUnitePage.mapLabelInput).toHaveText('Виберіть на мапі');
-
+  await expect(createUnitePage.detailedDescriptionTitle).toHaveText(expectText.technicalLocation);
+  await expect(createUnitePage.mapLabelInput).toHaveText(expectText.pickOnMap);
   await createUnitePage.nextButton.click();
-  await expect(createUnitePage.detailedDescriptionError).toHaveText(
-    'Виберіть коректне місце на мапі України'
-  );
+  await expect(createUnitePage.detailedDescriptionError).toHaveText(expectText.pickOnUkrMap);
   await expect(createUnitePage.mapLabelInput).toHaveCSS(
     'border',
     '1px solid rgb(247, 56, 89)'
   );
 
-  const address = 'Київ, вулиця Володимирська 21/20 Україна, Київська область';
+  const address = expectText.address;
   await createUnitePage.mapLabelInput.click();
-  await expect(createUnitePage.mapPopUpTitle).toHaveText('Техніка на мапі');
+  await expect(createUnitePage.mapPopUpTitle).toHaveText(expectText.technicOnMap);
   await expect(createUnitePage.mapPopUpCloseButton).toBeVisible();
   await expect(createUnitePage.mapPopUpAddressTitle).toHaveText(address);
   await expect(createUnitePage.mapPopUpMapField).toBeVisible();
@@ -45,7 +41,7 @@ test('Verify vehicle location division', async ({ page }) => {
   await expect(createUnitePage.mapLabelInput).toHaveText(address);
 
   await createUnitePage.mapLabelInput.click();
-  await createUnitePage.mapPopUpCityInput.fill('Бровари');
+  await createUnitePage.mapPopUpCityInput.fill(expectText.brovary);
   await createUnitePage.mapPopUpDropDown.click();
   const newAddress = await createUnitePage.mapPopUpAddressTitle.innerText();
   await createUnitePage.mapPopUpSubmitButton.click();

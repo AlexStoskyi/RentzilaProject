@@ -1,7 +1,7 @@
-import { Page } from '@playwright/test';
+import { Locator, Page } from '@playwright/test';
+import { BasePage } from './page';
 
-export class LoginPopUpPage {
-  constructor(private page: Page) {}
+export class LoginPopUpPage extends BasePage {
 
   get popUp() {
     return this.page.locator('div[class*=Authorization_container]');
@@ -46,5 +46,13 @@ export class LoginPopUpPage {
   async login(email: string, password: string) {
     await this.emailField.fill(email);
     await this.passwordField.fill(password);
+  }
+
+  async clickSubmitButton(): Promise<void> {
+      await super.clickElement(this.submitButton);
+  }
+
+  async clickHidePasswordButton(): Promise<void> {
+      await super.clickElement(this.hidePasswordButton);
   }
 }

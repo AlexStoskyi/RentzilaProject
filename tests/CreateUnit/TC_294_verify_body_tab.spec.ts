@@ -15,9 +15,9 @@ test('Verify body title and tab titles ', async ({ page }) => {
   const login: string | undefined = process.env.VALID_LOGIN;
   const password: string | undefined = process.env.VALID_PASSWORD;
 
-  await mainPage.loginButton.click();
+  await mainPage.clickLoginButton();
   await loginPopUpPage.login(login, password);
-  await loginPopUpPage.submitButton.click();
+  await loginPopUpPage.clickSubmitButton();
   await expect(mainPage.avatarField).toBeVisible();
   await page.goto(url.create_unit);
 
@@ -26,5 +26,9 @@ test('Verify body title and tab titles ', async ({ page }) => {
   const isActive = getAttributeMainBoxInfo?.includes('CustomLabel_labelActive');
   await expect(isActive).toBe(true);
   await expect(createUnitePage.mainBoxRoot).toBeVisible();
-  await createUnitePage.checkMainRootVisible();
+  await expect(createUnitePage.mainBoxInfo).toBeVisible(),
+  await expect(createUnitePage.mainBoxPhoto).toBeVisible(),
+  await expect(createUnitePage.mainBoxServices).toBeVisible(),
+  await expect(createUnitePage.mainBoxCost).toBeVisible(),
+  await expect(createUnitePage.mainBoxContacts).toBeVisible()
 });
