@@ -24,14 +24,18 @@ test('Verify specifications input field', async ({ page }) => {
   await expect(mainPage.avatarField).toBeVisible();
   await page.goto(url.create_unit);
 
-  await expect(createUnitePage.specificationsTitle).toHaveText(expectText.specifications);
+  await expect(createUnitePage.specificationsTitle).toHaveText(
+    expectText.specifications
+  );
   await createUnitePage.specificationsInput.click();
   await expect(createUnitePage.specificationsInput).toHaveText('');
 
   await createUnitePage.specificationsInput.fill('<>{};^');
   await expect(createUnitePage.specificationsInput).toHaveText('');
 
-  const randomValues = await textHelper.generateLongRandomText().substring(0, 9001);
+  const randomValues = await textHelper
+    .generateLongRandomText()
+    .substring(0, 9001);
   await createUnitePage.specificationsInput.fill(randomValues);
   const countSymbols = await createUnitePage.specificationsInput.inputValue();
   await expect(countSymbols.length).toBe(9000);

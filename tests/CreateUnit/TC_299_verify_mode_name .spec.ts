@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 import { MainPage } from '../../pages/mainPage';
 import { LoginPopUpPage } from '../../pages/loginPopUpPage';
 import url from '../../helper/endpoints.json';
-import expectText from '../../helper/expectText.json'
+import expectText from '../../helper/expectText.json';
 import { testSymbols } from '../../helper/testCreds';
 
 test.beforeEach(async ({ page }) => {
@@ -30,7 +30,9 @@ test('Verify model name input field', async ({ page }) => {
 
   for (let i = 0; i < testSymbols.length; i++) {
     await createUnitePage.modelNameInput.fill(testSymbols[i]);
-    await expect(createUnitePage.modelNameError).toHaveText(expectText.notMoreFifteen);
+    await expect(createUnitePage.modelNameError).toHaveText(
+      expectText.notMoreFifteen
+    );
   }
 
   await createUnitePage.modelNameInput.fill('<>{};^');

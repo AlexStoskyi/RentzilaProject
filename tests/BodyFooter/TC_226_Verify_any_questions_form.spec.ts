@@ -20,7 +20,7 @@ test('TC_226_Verify ""У Вас залишилися питання?"" form', as
   const questionsPage = new QuestionsPage(page);
   const apiHelper = new ApiHelper(request);
 
-  await mainPage.closeTelegramButton.click();
+  await mainPage.clickCloseTelegramButton();
 
   await footerPage.scrollIntoViewFooter();
   await questionsPage.fillRegistrationUserValue('', '');

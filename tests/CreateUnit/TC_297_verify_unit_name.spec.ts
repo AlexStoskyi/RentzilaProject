@@ -24,39 +24,46 @@ test('Verify unit name section', async ({ page }) => {
   await expect(mainPage.avatarField).toBeVisible();
   await page.goto(url.create_unit);
 
-
-  await expect(createUnitePage.announcementTitle).toHaveText(expectText.announcementName);
+  await expect(createUnitePage.announcementTitle).toHaveText(
+    expectText.announcementName
+  );
 
   const inputBackGroundText =
     await createUnitePage.announcementTitleInput.getAttribute('placeholder');
   await expect(inputBackGroundText).toBe(expectText.announcementName);
 
-  await createUnitePage.nextButton.click();
-  await expect(createUnitePage.announcementTitleError).toHaveText(expectText.obligatoryField);
+  await createUnitePage.clickNextButton();
+  await expect(createUnitePage.announcementTitleError).toHaveText(
+    expectText.obligatoryField
+  );
 
   await createUnitePage.announcementTitleInput.fill('123456789');
-  await createUnitePage.nextButton.click();
+  await createUnitePage.clickNextButton();
   await expect(createUnitePage.announcementTitleInput).toHaveCSS(
     'border-color',
     'rgb(247, 56, 89)'
   );
-  await expect(createUnitePage.announcementTitleError).toHaveText(expectText.notLessTen);
-  const randomText = await textHelper.generateRandomText()
+  await expect(createUnitePage.announcementTitleError).toHaveText(
+    expectText.notLessTen
+  );
+  const randomText = await textHelper.generateRandomText();
   await createUnitePage.announcementTitleInput.fill(randomText + '1');
   await createUnitePage.announcementTitleInput.scrollIntoViewIfNeeded();
-  await createUnitePage.nextButton.click();
+  await createUnitePage.clickNextButton();
   await expect(createUnitePage.announcementTitleInput).toHaveCSS(
     'border-color',
     'rgb(247, 56, 89)'
   );
-  await expect(createUnitePage.announcementTitleError).toHaveText(expectText.hundredSymbols);
+  await expect(createUnitePage.announcementTitleError).toHaveText(
+    expectText.hundredSymbols
+  );
 
   await createUnitePage.announcementTitleInput.clear();
   await createUnitePage.announcementTitleInput.fill('<>{};^');
   await expect(createUnitePage.announcementTitleInput).toHaveText('');
 
   await createUnitePage.announcementTitleInput.fill('abcdefghij');
-  await createUnitePage.nextButton.click();
+  await createUnitePage.clickNextButton();
   await expect(createUnitePage.announcementTitleInput).not.toHaveCSS(
     'border-color',
     'rgb(247, 56, 89)'

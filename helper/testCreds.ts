@@ -61,3 +61,13 @@ export const testSymbols: string[] = [
   '1234567890 12345',
   '123456789012345 ',
 ];
+
+export const mainRootBoxText: string[] = [
+  'Основна інформація',
+  'Фотографії',
+  'Послуги',
+  'Вартість',
+  'Контакти',
+];
+
+export const mainRootBoxNumber: string[] = ['1', '2', '3', '4', '5'];

@@ -1,8 +1,6 @@
-import { Page } from '@playwright/test';
+import { BasePage } from './page';
 
-export class QuestionsPage {
-  constructor(private page: Page) {}
-
+export class QuestionsPage extends BasePage {
   get questionsForm() {
     return this.page.locator(
       '//section[starts-with(@class, "Layouts_consultation")]'

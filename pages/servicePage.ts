@@ -1,8 +1,6 @@
-import { Page } from '@playwright/test';
+import { BasePage } from './page';
 
-export class ServicePage {
-  constructor(private page: Page) {}
-
+export class ServicePage extends BasePage {
   get servicesSection() {
     return this.page.getByTestId('services');
   }

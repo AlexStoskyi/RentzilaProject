@@ -23,7 +23,9 @@ test('Verify description section', async ({ page }) => {
   await expect(mainPage.avatarField).toBeVisible();
   await page.goto(url.create_unit);
 
-  await expect(createUnitePage.descriptionTitle).toHaveText(expectText.detailedDescription);
+  await expect(createUnitePage.descriptionTitle).toHaveText(
+    expectText.detailedDescription
+  );
   await createUnitePage.descriptionInput.click();
   await expect(createUnitePage.specificationsInput).toHaveText('');
 

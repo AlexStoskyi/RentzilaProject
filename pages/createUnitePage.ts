@@ -1,18 +1,22 @@
-import { expect, Page } from '@playwright/test';
+import { BasePage } from './page';
 
-export class CreateUnitPage {
-  constructor(private page: Page) {}
-
+export class CreateUnitPage extends BasePage {
   get title() {
     return this.page.locator(
       '//div[starts-with(@class,"CreateEditFlowLayout_title")]'
     );
   }
 
+  get mainBoxRootNumber() {
+    return this.page.getByTestId('labelNumber');
+  }
+
+  get mainBoxRootText() {
+    return this.page.locator('[class*=CustomLabel_labelTitle]');
+  }
+
   get mainBoxRoot() {
-    return this.page.locator(
-      '//div[starts-with(@class, "MuiBox-root css-15zcyu1")]'
-    );
+    return this.page.locator('[class*=MuiTabs-flexContainer]');
   }
 
   get mainBoxInfo() {
@@ -62,9 +66,7 @@ export class CreateUnitPage {
   }
 
   get categoryButton() {
-    return this.page.locator(
-      '//div[starts-with(@class,"CategorySelect_button")]'
-    );
+    return this.page.locator('[class*=CategorySelect_button]');
   }
 
   get categoryArrow() {
@@ -121,7 +123,7 @@ export class CreateUnitPage {
   }
 
   get announcementTitleInput() {
-    return this.page.locator('(//input[@data-testid="custom-input"])[1]');
+    return this.page.getByTestId('custom-input').first();
   }
 
   get announcementTitle() {
@@ -137,9 +139,11 @@ export class CreateUnitPage {
   }
 
   get manufacturerTransportEquipmentInput() {
-    return this.page.locator(
-      '[class*="CustomSelectWithSearch_searchInput"] input'
-    );
+    return this.page.locator('[class*=CustomSelectWithSearch_wrapper] input');
+  }
+
+  get manufacturerTransportEquipmentFiledText() {
+    return this.page.getByTestId('div-wrapper-customSelectWithSearch');
   }
 
   get manufacturerTransportEquipmentChosenInput() {
@@ -261,20 +265,43 @@ export class CreateUnitPage {
   get nextButton() {
     return this.page.locator('//button[@data-testid="nextButton"]');
   }
-  
-  async checkErrorMessages(): Promise<void> {
-    await Promise.all([
-      await expect(this.categoryErrorMessage).toBeVisible(),
-      await expect(this.announcementTitleError).toBeVisible(),
-      await expect(this.manufacturerTransportEquipmentError).toBeVisible(),
-      await expect(this.detailedDescriptionError).toBeVisible(),
-    ])
-  }
 
   async chooseCategory() {
     await this.categoryButton.click();
     await this.firstCategoryList.first().click();
     await this.secondCategoryList.first().click();
+    const textBeforeClick = await this.thirdCategoryList.first().innerText();
     await this.thirdCategoryList.first().click();
+
+    return textBeforeClick;
+  }
+
+  async clickMapLabelInput() {
+    await super.clickElement(this.mapLabelInput);
+  }
+
+  async clickManufacturerTransportEquipmentDropDown() {
+    await super.clickElement(this.manufacturerTransportEquipmentDropDown);
+  }
+
+  async clickMapPopUpSubmitButton() {
+    await this.page.waitForTimeout(500);
+    await super.clickElement(this.mapPopUpSubmitButton);
+  }
+
+  async clickNextButton() {
+    await super.clickElement(this.nextButton);
+  }
+
+  async getCountMainRootBox(): Promise<number> {
+    return await super.getElementCount(this.mainBoxRoot);
+  }
+
+  async getMainRootText(i: number) {
+    return await super.getElementText(this.mainBoxRootText.nth(i));
+  }
+
+  async getMainRootNumber(i: number) {
+    return await super.getElementText(this.mainBoxRootNumber.nth(i));
   }
 }

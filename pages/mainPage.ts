@@ -1,8 +1,6 @@
-import { Page } from '@playwright/test';
 import { BasePage } from './page';
 
 export class MainPage extends BasePage {
-
   get logo() {
     return this.page.locator('//a/div[@data-testid="logo"]');
   }
@@ -35,5 +33,9 @@ export class MainPage extends BasePage {
 
   async clickLoginButton() {
     await super.clickElement(this.loginButton);
+  }
+
+  async clickCloseTelegramButton() {
+    await super.clickElement(this.closeTelegramButton);
   }
 }
