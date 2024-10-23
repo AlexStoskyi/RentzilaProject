@@ -1,27 +1,15 @@
-import { test, expect } from '@playwright/test';
-import { LoginPopUpPage } from '../../pages/loginPopUpPage';
-import { CreateUnitPage } from '../../pages/createUnitePage';
-import { PhotoPage } from '../../pages/createUnitePhotoPage';
-import { ServicesPage } from '../../pages/createUniteServicesPage';
-import { MainPage } from '../../pages/mainPage';
+import { test } from './../../fixtures/fixtures';
+import { expect } from '@playwright/test';
 import url from '../../helper/endpoints.json';
 import { faker } from '@faker-js/faker';
-import expectText from '../../helper/expectText.json';
-import { mainRootBoxText, mainRootBoxNumber } from '../../helper/testCreds';
+import expectText from '../../helper/expectText.json'
+import { mainRootBoxText, mainRootBoxNumber } from '../../helper/testCreds'
 
-test.beforeEach(async ({ page }) => {
-  await page.goto(url.create_unit);
-});
-
-test('TC_393_Verify ""Далі"" button', async ({ page }) => {
-  const loginPopUpPage = new LoginPopUpPage(page);
-  const createUnitePage = new CreateUnitPage(page);
-  const photoPage = new PhotoPage(page);
-  const mainPage = new MainPage(page);
-  const servicesPage = new ServicesPage(page);
+test.beforeEach(async ({ loginPopUpPage, createUnitePage, mainPage }) => {
   const login = process.env.VALID_LOGIN;
   const password = process.env.VALID_PASSWORD;
 
+  await loginPopUpPage.open(url.create_unit);
   await loginPopUpPage.login(login, password);
   await loginPopUpPage.clickSubmitButton();
   await mainPage.clickCloseTelegramButton();
@@ -33,6 +21,9 @@ test('TC_393_Verify ""Далі"" button', async ({ page }) => {
   await createUnitePage.clickMapLabelInput();
   await createUnitePage.clickMapPopUpSubmitButton();
   await createUnitePage.clickNextButton();
+});
+
+test('TC_393_Verify ""Далі"" button', async ({ photoPage, createUnitePage, createUniteServicesPage }) => {
 
   await expect(photoPage.titlePage).toBeVisible();
 
@@ -52,7 +43,7 @@ test('TC_393_Verify ""Далі"" button', async ({ page }) => {
 
   await photoPage.fileChooser('images', '1.jpeg');
   await createUnitePage.clickNextButton();
-  await expect(await servicesPage.servicesBody).toBeVisible();
+  await expect(await createUniteServicesPage.servicesBody).toBeVisible();
   for (let i = 0; i < (await createUnitePage.getCountMainRootBox()); i++) {
     await expect(await createUnitePage.getMainRootNumber(i)).toBe(
       mainRootBoxNumber[i]

@@ -10,11 +10,11 @@ import { LoginPopUpPage } from '../pages/loginPopUpPage';
 import { FooterPage } from '../pages/footerPage';
 import { PhotoPage } from '../pages/createUnitePhotoPage';
 import { CreateUnitPage } from '../pages/createUnitePage';
+import { CreateUnitServicesPage } from '../pages/createUniteServicesPage';
 
 export type MyFixtures = {
   mainPage: MainPage;
   productPage: ProductPage;
-  page: BasePage;
   unitPage: UnitPage;
   specialEquipPage: SpecialEquipPage;
   servicePage: ServicePage;
@@ -23,6 +23,7 @@ export type MyFixtures = {
   footerPage: FooterPage;
   photoPage: PhotoPage;
   createUnitePage: CreateUnitPage;
+  createUniteServicesPage: CreateUnitServicesPage;
 };
 
 export const test = base.extend<MyFixtures>({
@@ -32,10 +33,6 @@ export const test = base.extend<MyFixtures>({
 
   productPage: async ({ page }, use) => {
     await use(new ProductPage(page));
-  },
-
-  page: async ({ page }, use) => {
-    await use(new BasePage(page));
   },
 
   unitPage: async ({ page }, use) => {
@@ -69,4 +66,8 @@ export const test = base.extend<MyFixtures>({
   createUnitePage: async ({ page }, use) => {
     await use(new CreateUnitPage(page));
   },
+
+  createUniteServicesPage: async ({ page}, use) => {
+    await use(new CreateUnitServicesPage(page));
+  }
 });

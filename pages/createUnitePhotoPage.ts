@@ -36,6 +36,14 @@ export class PhotoPage extends BasePage {
     return this.page.getByTestId('description');
   }
 
+  get mainImageLabel(){
+    return this.page.getByTestId('mainImageLabel')
+  }
+
+  get deleteImageButton(){
+    return this.page.getByTestId('deleteImage')
+  }
+
   async setElementFilesInPhotoSection(
     fileChooser: FileChooser,
     filePath: string
@@ -58,6 +66,12 @@ export class PhotoPage extends BasePage {
     );
   }
 
+  async addMultipleImages(folder: string, images: string[]) {
+    for (let index = 0; index < images.length; index++) {
+        await this.fileChooser(folder, images[index], index);
+    }
+}
+
   async clickClosePopUpContent() {
     await super.clickElement(this.popUpContentCloseButton);
   }
@@ -77,5 +91,45 @@ export class PhotoPage extends BasePage {
 
   async clickPrevButton() {
     await super.clickElement(this.prevButton);
+  }
+
+  async getAllImageField(){
+    return await super.getAllElements(this.addImageField)
+  }
+
+  async getAllImageFieldAttributeDraggable(){
+    const draggableElements = await this.getAllImageField();
+
+    const getDraggable = await Promise.all(
+      draggableElements.map(async (element) => {
+          const draggable = await element.getAttribute('draggable');
+          return draggable === 'true';
+      })
+  )
+  const trueDraggableElements = getDraggable.filter(isDraggable => isDraggable);
+  return trueDraggableElements;
+  };
+
+  async getMainImageText(){
+   return  this.mainImageLabel.innerText()
+  }
+
+  async performDragEndDrop() {
+    const source = await this.getUploadFieldByIndex(1); 
+    const target = await this.getUploadFieldByIndex(0); 
+    await this.dragEndDrop(source, target);
+  } 
+
+  async getSrcAttributeImage(i: number){
+    await super.getElementAttributeText(await this.getUploadFieldByIndex(i),'src')
+  }
+
+  async clickDeleteImageButton(i: number = 0){
+    await super.hoverElement(this.addImageField.nth(i))
+    await super.clickElement(this.deleteImageButton.nth(i))
+  }
+
+  async getCountOfImage(){
+    return super.getElementCount(this.addImageField)
   }
 }

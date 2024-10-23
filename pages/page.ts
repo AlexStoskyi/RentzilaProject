@@ -50,6 +50,10 @@ export class BasePage {
     return subSelector ? element.locator(subSelector) : element;
   }
 
+  async getAllElements(locator: Locator) {
+    return await locator.elementHandles();
+  }
+
   async getElementText(element: Locator): Promise<string> {
     return await element.innerText();
   }
@@ -63,5 +67,19 @@ export class BasePage {
     attribute: string
   ): Promise<string> {
     return await element.getAttribute(attribute);
+  }
+
+  async dragEndDrop(sourceSelector: Locator, targetSelector: Locator) {
+    const sourceBox = await sourceSelector.boundingBox();
+    const targetBox = await targetSelector.boundingBox();
+
+    await this.page.mouse.move(sourceBox.x + sourceBox.width / 2, sourceBox.y + sourceBox.height / 2);
+    await this.page.mouse.down();
+    await this.page.mouse.move(targetBox.x + targetBox.width / 2, targetBox.y + targetBox.height / 2);
+    await this.page.mouse.up();
+  }
+
+  async hoverElement(element: Locator){
+    await element.hover()
   }
 }

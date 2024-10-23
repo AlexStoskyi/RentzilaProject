@@ -1,6 +1,6 @@
 import { BasePage } from './page';
 
-export class ServicesPage extends BasePage {
+export class CreateUnitServicesPage extends BasePage {
   get servicesBody() {
     return this.page.locator('[class*=ServicesUnitFlow_wrapper]');
   }

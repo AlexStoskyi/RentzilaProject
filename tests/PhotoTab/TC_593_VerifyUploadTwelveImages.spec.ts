@@ -1,8 +1,8 @@
-import { test } from './../../fixtures/fixtures';
+import { test } from '../../fixtures/fixtures';
 import { expect } from '@playwright/test';
 import url from '../../helper/endpoints.json';
 import { faker } from '@faker-js/faker';
-import expectText from '../../helper/expectText.json'
+import { imagesArr } from '../../helper/testCreds';
 
 test.beforeEach(async ({ loginPopUpPage, createUnitePage, mainPage }) => {
   const login = process.env.VALID_LOGIN;
@@ -22,29 +22,9 @@ test.beforeEach(async ({ loginPopUpPage, createUnitePage, mainPage }) => {
   await createUnitePage.clickNextButton();
 });
 
-test('TC_384_Verify same images uploading', async ({ photoPage }) => {
+test('TC_593_Verify 12 images uploading', async ({ photoPage }) => {
   await expect(await photoPage.titlePage).toBeVisible();
 
-  for (let i = 0; i < 2; i++) {
-    await photoPage.fileChooser('images', '1.jpeg', i);
-  }
-  await expect(photoPage.popUpContent).toBeVisible();
-  await expect(photoPage.popUpContentError).toHaveText(
-    expectText.sameImage
-  );
-  
-  await photoPage.clickClosePopUpContent();
-  expect((await photoPage.getAllImageFieldAttributeDraggable()).length).toBe(1);
-
-  for (let i = 1; i < 2; i++) {
-    await photoPage.fileChooser('images', '1.jpeg', i);
-  }
-  await photoPage.clickSavePopUpContent();
-  expect((await photoPage.getAllImageFieldAttributeDraggable()).length).toBe(1);
-
-  for (let i = 1; i < 2; i++) {
-    await photoPage.fileChooser('images', '1.jpeg', i);
-  }
-  await photoPage.clickOutsidePopUpContent(100, 200);
-  expect((await photoPage.getAllImageFieldAttributeDraggable()).length).toBe(1);
+  await photoPage.addMultipleImages('images', imagesArr)
+  await expect(await photoPage.getMainImageText()).toContain('Головне');
 });
