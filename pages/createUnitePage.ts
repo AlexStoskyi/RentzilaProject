@@ -1,7 +1,7 @@
 import { BasePage } from './page';
 
 export class CreateUnitPage extends BasePage {
-  mainRootBoxNumber: any;
+
   get title() {
     return this.page.locator(
       '//div[starts-with(@class,"CreateEditFlowLayout_title")]'

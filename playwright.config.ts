@@ -11,10 +11,12 @@ export default defineConfig({
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
   reporter: [['html',{open: 'never'}],[process.env.CI ? 'dot' : 'list']],
-  use: {
+  expect: { timeout: 10_000 },
+ use: {
+    screenshot: 'only-on-failure',
+    video: process.env.CI ? 'on-first-retry' : 'on',
     trace: 'on-first-retry',
   },
-
   projects: [
     {
       name: 'chromium',

@@ -12,9 +12,8 @@ export class BasePage {
     this.page = page;
   }
 
-  async open(url?: string): Promise<void> {
-    const fullUrl = url ? `${url}` : '/';
-    await this.page.goto(fullUrl);
+  async open(url = '/'): Promise<void> {
+    await this.page.goto(url);
   }
 
   async clickElement(element: Locator): Promise<void> {
