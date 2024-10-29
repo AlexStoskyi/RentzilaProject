@@ -1,8 +1,6 @@
-import { Page } from '@playwright/test';
+import { BasePage } from './page';
 
-export class UnitPage {
-  constructor(private page: Page) {}
-
+export class UnitPage extends BasePage {
   get unitServices() {
     return this.page.locator('//div[@itemprop="services"]/div');
   }

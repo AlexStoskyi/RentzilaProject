@@ -27,8 +27,8 @@ test('Verify body title and tab titles ', async ({ page }) => {
   await expect(isActive).toBe(true);
   await expect(createUnitePage.mainBoxRoot).toBeVisible();
   await expect(createUnitePage.mainBoxInfo).toBeVisible(),
-  await expect(createUnitePage.mainBoxPhoto).toBeVisible(),
-  await expect(createUnitePage.mainBoxServices).toBeVisible(),
-  await expect(createUnitePage.mainBoxCost).toBeVisible(),
-  await expect(createUnitePage.mainBoxContacts).toBeVisible()
+    await expect(createUnitePage.mainBoxPhoto).toBeVisible(),
+    await expect(createUnitePage.mainBoxServices).toBeVisible(),
+    await expect(createUnitePage.mainBoxCost).toBeVisible(),
+    await expect(createUnitePage.mainBoxContacts).toBeVisible();
 });

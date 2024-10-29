@@ -18,7 +18,7 @@ test('Authorization with empty fields ', async ({ page }) => {
   const errorMessageEmail = await loginPopUpPage.emailErrorMessage;
   const errorMessagePassword = await loginPopUpPage.passwordErrorMessage;
   await expect(errorMessageEmail).toBeVisible();
-  await expect(errorMessageEmail).toContainText(expectText.noEmptyField);  
+  await expect(errorMessageEmail).toContainText(expectText.noEmptyField);
   await expect(errorMessageEmail).toHaveCSS('color', 'rgb(247, 56, 89)');
 
   await expect(errorMessagePassword).toBeVisible();

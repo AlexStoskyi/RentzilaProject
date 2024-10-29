@@ -20,7 +20,10 @@ test('Authorization with valid phone number and password', async ({ page }) => {
   await loginPopUpPage.clickHidePasswordButton();
   await expect(loginPopUpPage.passwordField).toHaveAttribute('type', 'text');
   await loginPopUpPage.clickHidePasswordButton();
-  await expect(loginPopUpPage.passwordField).toHaveAttribute('type','password');
+  await expect(loginPopUpPage.passwordField).toHaveAttribute(
+    'type',
+    'password'
+  );
 
   await loginPopUpPage.clickSubmitButton();
   await expect(mainPage.avatarField).toBeVisible();

@@ -1,8 +1,7 @@
-import { expect, Page } from '@playwright/test';
+import { expect } from '@playwright/test';
+import { BasePage } from './page';
 
-export class FooterPage {
-  constructor(private page: Page) {}
-
+export class FooterPage extends BasePage {
   get privacyPolicyBody() {
     return this.page.locator('[class*=PrivacyPolicy_container]');
   }

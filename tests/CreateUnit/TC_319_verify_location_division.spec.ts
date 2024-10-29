@@ -22,28 +22,34 @@ test('Verify vehicle location division', async ({ page }) => {
   await expect(mainPage.avatarField).toBeVisible();
   await page.goto(url.create_unit);
 
-  await expect(createUnitePage.detailedDescriptionTitle).toHaveText(expectText.technicalLocation);
+  await expect(createUnitePage.detailedDescriptionTitle).toHaveText(
+    expectText.technicalLocation
+  );
   await expect(createUnitePage.mapLabelInput).toHaveText(expectText.pickOnMap);
-  await createUnitePage.nextButton.click();
-  await expect(createUnitePage.detailedDescriptionError).toHaveText(expectText.pickOnUkrMap);
+  await createUnitePage.clickNextButton();
+  await expect(createUnitePage.detailedDescriptionError).toHaveText(
+    expectText.pickOnUkrMap
+  );
   await expect(createUnitePage.mapLabelInput).toHaveCSS(
     'border',
     '1px solid rgb(247, 56, 89)'
   );
 
   const address = expectText.address;
-  await createUnitePage.mapLabelInput.click();
-  await expect(createUnitePage.mapPopUpTitle).toHaveText(expectText.technicOnMap);
+  await createUnitePage.clickMapLabelInput();
+  await expect(createUnitePage.mapPopUpTitle).toHaveText(
+    expectText.technicOnMap
+  );
   await expect(createUnitePage.mapPopUpCloseButton).toBeVisible();
   await expect(createUnitePage.mapPopUpAddressTitle).toHaveText(address);
   await expect(createUnitePage.mapPopUpMapField).toBeVisible();
-  await createUnitePage.mapPopUpSubmitButton.click();
+  await createUnitePage.clickMapPopUpSubmitButton();
   await expect(createUnitePage.mapLabelInput).toHaveText(address);
 
-  await createUnitePage.mapLabelInput.click();
+  await createUnitePage.clickMapLabelInput();
   await createUnitePage.mapPopUpCityInput.fill(expectText.brovary);
   await createUnitePage.mapPopUpDropDown.click();
   const newAddress = await createUnitePage.mapPopUpAddressTitle.innerText();
-  await createUnitePage.mapPopUpSubmitButton.click();
+  await createUnitePage.clickMapPopUpSubmitButton();
   await expect(createUnitePage.mapLabelInput).toHaveText(newAddress);
 });

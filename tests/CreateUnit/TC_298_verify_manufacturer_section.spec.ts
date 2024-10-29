@@ -23,7 +23,9 @@ test('Verify vehicle manufacturer section', async ({ page }) => {
   await expect(mainPage.avatarField).toBeVisible();
   await page.goto(url.create_unit);
 
-  await expect(createUnitePage.manufacturerTransportEquipmentTitle).toHaveText(expectText.vehicleManufacturer);
+  await expect(createUnitePage.manufacturerTransportEquipmentTitle).toHaveText(
+    expectText.vehicleManufacturer
+  );
 
   const inputBackGroundText =
     await createUnitePage.manufacturerTransportEquipmentInput.getAttribute(
@@ -31,12 +33,14 @@ test('Verify vehicle manufacturer section', async ({ page }) => {
     );
   await expect(inputBackGroundText).toBe(expectText.fillVehicleManufacturer);
 
-  await createUnitePage.nextButton.click();
+  await createUnitePage.clickNextButton();
   await expect(createUnitePage.manufacturerTransportEquipmentField).toHaveCSS(
     'border',
     '1px solid rgb(247, 56, 89)'
   );
-  await expect(createUnitePage.manufacturerTransportEquipmentError).toHaveText(expectText.obligatoryField);
+  await expect(createUnitePage.manufacturerTransportEquipmentError).toHaveText(
+    expectText.obligatoryField
+  );
 
   await createUnitePage.manufacturerTransportEquipmentInput.fill('АТЭК');
   await expect(
@@ -65,17 +69,19 @@ test('Verify vehicle manufacturer section', async ({ page }) => {
 
   const randomText = await faker.lorem.words(20).substring(0, 101);
   await createUnitePage.manufacturerTransportEquipmentInput.fill(randomText);
-  await createUnitePage.nextButton.click();
+  await createUnitePage.clickNextButton();
   const countSymbols =
     await createUnitePage.manufacturerTransportEquipmentInput.inputValue();
   await expect(countSymbols.length).toBe(100);
 
   await createUnitePage.manufacturerTransportEquipmentInput.fill('ABC');
-  await createUnitePage.manufacturerTransportEquipmentDropDown.click();
+  await createUnitePage.clickManufacturerTransportEquipmentDropDown();
   await expect(
     createUnitePage.manufacturerTransportEquipmentChosenInput
   ).toHaveText('ABC');
 
   await createUnitePage.manufacturerTransportEquipmentFieldCloseButton.click();
-  await expect(createUnitePage.manufacturerTransportEquipmentInput).toHaveText('');
+  await expect(createUnitePage.manufacturerTransportEquipmentInput).toHaveText(
+    ''
+  );
 });

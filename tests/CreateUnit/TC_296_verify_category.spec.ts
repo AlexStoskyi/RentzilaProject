@@ -26,8 +26,10 @@ test('Verify category (Категорія) section ', async ({ page }) => {
   await expect(categoryButtonText).toContain(expectText.chooseCategory);
   expect(createUnitePage.categoryArrow).toBeVisible();
 
-  await createUnitePage.nextButton.click();
-  await expect(createUnitePage.categoryErrorMessage).toContainText(expectText.obligatoryField);
+  await createUnitePage.clickNextButton();
+  await expect(createUnitePage.categoryErrorMessage).toContainText(
+    expectText.obligatoryField
+  );
 
   await createUnitePage.categoryButton.click();
   await expect(createUnitePage.categoryPopupWrapper).toBeVisible();

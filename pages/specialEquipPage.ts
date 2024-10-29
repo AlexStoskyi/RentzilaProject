@@ -1,8 +1,6 @@
-import { Page } from '@playwright/test';
+import { BasePage } from './page';
 
-export class SpecialEquipPage {
-  constructor(private page: Page) {}
-
+export class SpecialEquipPage extends BasePage {
   get specialEquipSection() {
     return this.page.getByTestId('specialEquipment');
   }

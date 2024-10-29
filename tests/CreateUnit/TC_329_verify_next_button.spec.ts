@@ -22,27 +22,33 @@ test('Verify ""Далі"" button', async ({ page }) => {
   await loginPopUpPage.clickSubmitButton();
   await expect(mainPage.avatarField).toBeVisible();
   await page.goto(url.create_unit);
-  await mainPage.closeTelegramButton.click();
+  await mainPage.clickCloseTelegramButton();
 
   await expect(createUnitePage.nextButton).toHaveText(expectText.next);
 
-  await createUnitePage.nextButton.click();
-  await createUnitePage.checkErrorMessages();
-
-  await createUnitePage.chooseCategory();
+  await createUnitePage.clickNextButton();
+  await expect(createUnitePage.announcementTitleError).toBeVisible(),
+    await expect(
+      createUnitePage.manufacturerTransportEquipmentError
+    ).toBeVisible(),
+    await expect(createUnitePage.detailedDescriptionError).toBeVisible(),
+    await expect(createUnitePage.categoryErrorMessage).toBeVisible(),
+    await createUnitePage.chooseCategory();
 
   const fakeName = faker.commerce.productName();
   await createUnitePage.announcementTitleInput.fill(fakeName);
 
   await createUnitePage.manufacturerTransportEquipmentInput.fill('ABC');
-  await createUnitePage.manufacturerTransportEquipmentDropDown.click();
+  await createUnitePage.clickManufacturerTransportEquipmentDropDown();
 
-  await createUnitePage.mapLabelInput.click();
-  await createUnitePage.mapPopUpSubmitButton.click();
+  await createUnitePage.clickMapLabelInput();
+  await createUnitePage.clickMapPopUpSubmitButton();
   const address = expectText.address;
   await expect(createUnitePage.mapLabelInput).toHaveText(address);
 
-  await createUnitePage.nextButton.click();
+  await createUnitePage.clickNextButton();
   await expect(createUnitePage.title).toBeVisible();
-  await expect(createUnitePage.photoEquipmentTitle).toHaveText(expectText.photoOfTechnic);
+  await expect(createUnitePage.photoEquipmentTitle).toHaveText(
+    expectText.photoOfTechnic
+  );
 });

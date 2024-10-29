@@ -1,8 +1,6 @@
-import { Page } from '@playwright/test';
+import { BasePage } from './page';
 
-export class ProductPage {
-  constructor(private page: Page) {}
-
+export class ProductPage extends BasePage {
   get searchField() {
     return this.page.getByTestId('searchForm');
   }
